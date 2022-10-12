@@ -15,39 +15,17 @@ HUD.draw = function() {
     hudCTX.clearRect(0, 0, 960, 640); // Clear the canvas
 
     // Draw Night
-    if(HUD.timer<0.2){
+    if (HUD.timer < 0.2) {
         hudCTX.save();
         hudCTX.fillStyle = "#003";
-        if(HUD.timer>0){
+        if (HUD.timer > 0) {
             hudCTX.globalAlpha = 0.8*(0.2-HUD.timer)/0.2;
-        }else{
+        } else {
             hudCTX.globalAlpha = 0.8;
         }
         hudCTX.fillRect(0,0,480,300);
         hudCTX.restore();
     }
-
-    // // Draw Outer Circle
-    // hudCTX.fillStyle = "#333";
-    // hudCTX.beginPath();
-    // hudCTX.arc(0,300,60,0,Math.PI*2,false);
-    // hudCTX.fill();
-    //
-    // // Draw Sun & Moon
-    // hudCTX.save();
-    // hudCTX.translate(0,300);
-    // hudCTX.rotate((1-HUD.timer)*0.5*Math.PI);
-    // hudCTX.drawImage( HUD.timerImage, -50, -50, 100, 100 );
-    // hudCTX.restore();
-    //
-    // // Draw Arc
-    // if(HUD.awesome>=0){
-    //     hudCTX.beginPath();
-    //     hudCTX.arc(0,300,55,0,-HUD.awesome*0.5*Math.PI,true);
-    //     hudCTX.lineWidth = 10;
-    //     hudCTX.strokeStyle = "#FFF";
-    //     hudCTX.stroke();
-    // }
 }
 
 HUD.enterFrame = function() {
@@ -82,7 +60,7 @@ HUD.enterFrame = function() {
                     menu.gameover();
                 }
             }
-        }else if(HUD.timer>1){
+        } else if (HUD.timer>1) {
             HUD.timer = 1;
         }
 
