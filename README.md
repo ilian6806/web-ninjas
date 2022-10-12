@@ -1,2 +1,2 @@
 # web-ninjas
-Web ninjas team
+Web ninjas team hackathon entry!
