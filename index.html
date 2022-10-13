@@ -39,11 +39,11 @@
             <div id='loading'></div>
         </div>
         <div id="game_container" style='display:none;'>
-            <canvas id="game" width="480" height="300"> </canvas>
-            <canvas id="hud" width="480" height="300"></canvas>
+            <canvas id="game"> </canvas>
+            <canvas id="hud"></canvas>
             <div id='instructions' style='position:relative;opacity:1'>
-                <div class='title' style="position:absolute;top:20px;left:20px;"></div>
-                <div class="subtitle" style='position:absolute;top:100px;left:200px;width:270px;height:100px;color:#E84298;'>
+                <div class='title' style="position:absolute;top:20px;left:0;right:0"></div>
+                <div class="subtitle" style='position:absolute;top:100px;left:0; right:0; text-align:center;margin: 0 auto;color:#E84298;'>
                     Press Screen or S to start
                 </div>
             </div>
@@ -64,12 +64,12 @@
                     <div class="center0">
                         <div class="center1">
                             <div class="center2">
-                                <div id='pause' class="screenMenu" onclick='menu.togglePause();'>
+                                <div id='pause' class="screenMenu" style="position:relative; top:40px;" onclick='menu.togglePause();'>
                                     <div class='title' style="background-position:0 -100px;"></div>
                                     <div class='stats' id='main' style='font-size:16px'>
                                         Press the Play button<br>to resume flight
                                     </div>
-                                    <div style="width: 480px; height: 320px; position: absolute; top: 0; left: 0;"></div>
+                                    <div id="paused-div" style="position: absolute; top: 0; left: 0;"></div>
                                 </div>
                                 <div id='gameover' class="screenMenu" style="top:40px;" >
                                     <div class="center2" style="width:400px;">
@@ -99,12 +99,37 @@
         <script src="js/Game.js"></script>
 
         <script type="text/javascript">
+            ratio = 0.9;
             canvas = document.getElementById('game');
             ctx = canvas.getContext('2d');
             hudCanvas = document.getElementById('hud');
             hudCTX = hudCanvas.getContext('2d');
             SG.loadArtAssets();
             SG.init();
+
+            var render = function() {
+                ctx.canvas.width = document.documentElement.clientWidth * ratio;
+                ctx.canvas.height = document.documentElement.clientHeight * ratio;
+                ctx.fillStyle = "#008000";
+                ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+
+                hudCTX.canvas.width = document.documentElement.clientWidth * ratio;
+                hudCTX.canvas.height = document.documentElement.clientHeight * ratio;
+                hudCTX.fillStyle = "#008000";
+                hudCTX.fillRect(0, 0, hudCTX.canvas.width, hudCTX.canvas.height);
+
+                var hudScreen = document.getElementById('hud_screen');
+                hudScreen.style.left = hudCTX.canvas.width + 'px';
+                hudScreen.style.height = hudCTX.canvas.height + 'px';
+
+                var pausedDiv = document.getElementById('paused-div');
+                pausedDiv.width = document.documentElement.clientWidth * ratio;
+                pausedDiv.height = document.documentElement.clientHeight * ratio;
+            };
+
+            window.addEventListener("resize", render);
+
+            render();
         </script>
     </div>
 </body>

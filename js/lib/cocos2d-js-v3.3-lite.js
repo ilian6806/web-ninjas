@@ -950,13 +950,13 @@ cc._setup = function (el, width, height) {
         element.appendChild(localCanvas);
     }
     localCanvas.addClass("gameCanvas");
-    localCanvas.setAttribute("width", width || 480);
-    localCanvas.setAttribute("height", height || 320);
+    localCanvas.setAttribute("width", width || ctx.canvas.width);
+    localCanvas.setAttribute("height", height || ctx.canvas.height);
     localCanvas.setAttribute("tabindex", 99);
     localCanvas.style.outline = "none";
     localConStyle = localContainer.style;
-    localConStyle.width = (width || 480) + "px";
-    localConStyle.height = (height || 320) + "px";
+    localConStyle.width = (width || ctx.canvas.width) + "px";
+    localConStyle.height = (height || ctx.canvas.height) + "px";
     localConStyle.margin = "0 auto";
     localConStyle.position = 'relative';
     localConStyle.overflow = 'hidden';

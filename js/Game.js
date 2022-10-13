@@ -69,10 +69,17 @@ SG.draw = function() {
     if (SG.timer_draw) {
         cancelAnimationFrame(SG.timer_draw);
     }
-    ctx.clearRect(0, 0, 960, 640); // Clear the canvas
+    // ctx.clearRect(0, 0, 960, 640); // Clear the canvas
+    // ctx.save();
+    // ctx.translate(100,150-SG.yDisp*SG.gScale);
+
+    ctx.clearRect(0, 0, ctx.canvas.width * 2, ctx.canvas.height * 2); // Clear the canvas
     ctx.save();
-    ctx.translate(100,150-SG.yDisp*SG.gScale);
-    ctx.scale(SG.gScale,SG.gScale);
+    ctx.translate(
+        ctx.canvas.width / 7,
+        ctx.canvas.height / 2 - SG.yDisp * SG.gScale
+    );
+    // ctx.scale(SG.gScale,SG.gScale);
     terrain.draw(seal.coord.x);
     seal.draw();
     HUD.draw();

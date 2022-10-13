@@ -1,24 +1,46 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    height: 100%;
+    width: 100%;
+}
 
 body {
-    color: #FFF;
+    min-height: 100%;
+    width: 100%;
+    background-color: #c8e6f0;
+    color: #fff;
     overflow: hidden;
     margin: 0;
     padding: 0;
     font-family: Helvetica, Arial, sans-serif;
 }
 
-div, p, span {
+div,
+p,
+span {
     text-shadow: 0 0 2px #943882;
     -moz-text-shadow: 0 0 2px #943882;
     -webkit-text-shadow: 0 0 2px #943882;
 }
 
-canvas, #background, #screen, #screen>div {
-    width: 480px;
-    height: 300px;
+canvas,
+#background,
+#screen,
+#screen > div {
+    /* width: 480px;
+    height: 300px; */
     position: absolute;
-    top: 0;
+    /* top: 0;
+    left: 0; */
+    top: 6px;
     left: 0;
+    right: 0;
+    margin: 0 auto;
 }
 
 img {
@@ -26,13 +48,13 @@ img {
 }
 
 #background {
-    background-color: #C8E6F0;
+    background-color: #c8e6f0;
 }
 
 #loading {
     width: 100%;
     height: 100%;
-    background:url('../images/Loading.png');
+    background: url('../images/Loading.png');
 }
 
 .center0 {
@@ -40,7 +62,9 @@ img {
 }
 
 .center1 {
-    display: table; width:100%;height:100%;
+    display: table;
+    width: 100%;
+    height: 100%;
 }
 
 .center2 {
@@ -64,9 +88,9 @@ img {
 #hud_screen {
     position: absolute;
     top: 0;
-    left: 480px;
+    /* left: 480px; */
     width: 0;
-    height: 300px;
+    /* height: 300px; */
     z-index: 1;
 }
 
@@ -121,7 +145,7 @@ img {
     margin-bottom: 10px;
 }
 
-.stats > #score{
+.stats > #score {
     float: left;
     width: 100px;
 }
@@ -131,5 +155,5 @@ img {
     text-align: right;
     margin-right: 10px;
     width: 130px;
-    color: #E84298;
+    color: #e84298;
 }
