@@ -37,6 +37,13 @@ img {
     border: 0;
 }
 
+#main-container {
+    position: relative;
+    margin: 0 auto;
+    overflow: hidden;
+    border: 1px solid lightblue;
+}
+
 #background {
     background-color: #C8E6F0;
 }

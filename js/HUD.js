@@ -12,7 +12,7 @@ HUD.init = function() {
 
 HUD.draw = function() {
 
-    hudCTX.clearRect(0, 0, 960, 640); // Clear the canvas
+    hudCTX.clearRect(0, 0, Config.gameWidth, Config.gameHeight); // Clear the canvas
 
     // Draw Night
     if (HUD.timer < 0.2) {
@@ -23,7 +23,7 @@ HUD.draw = function() {
         } else {
             hudCTX.globalAlpha = 0.8;
         }
-        hudCTX.fillRect(0,0,480,300);
+        hudCTX.fillRect(0,0, Config.gameWidth, Config.gameHeight);
         hudCTX.restore();
     }
 }

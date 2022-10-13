@@ -78,10 +78,59 @@ SG.init = function() {
     SG.gScale = 1;
     SG.yDisp = -310;
     SG.shake = 0;
+    SG.setSize();
     menu.init();
     HUD.init();
     seal.init();
     terrain.init();
+};
+
+SG.setSize = function() {
+
+    let width = window.innerWidth;
+    let height = window.innerHeight;
+
+    //@TODO: deviceRatio check for changing Config.gameMaxHeight/Height
+
+    if (width > Config.gameMaxWidth && height > Config.gameMaxHeight && width > height) { // Set game to max width and height by ratio
+        Config.gameWidth = Config.gameMaxWidth;
+        Config.gameHeight = Config.gameWidth / Config.aspectRatio;
+    } else if (height > Config.gameMaxHeight) { // Set game to max height and width by ratio
+        Config.gameHeight = Config.gameMaxHeight;
+        Config.gameWidth = Config.gameHeight * Config.aspectRatio;
+    } else if (width < Config.defaultGameWidth) { // Set game to user width and height by ratio
+        Config.gameWidth = width;
+        Config.gameHeight = Config.gameWidth / Config.aspectRatio;
+    } else if (height < Config.defaultGameHeight) { // Set game to user height and width by ratio
+        Config.gameHeight = height;
+        Config.gameWidth = Config.gameHeight * Config.aspectRatio;
+    } else if (width > height) { // Set game to user height and width by ratio
+        Config.gameHeight = height;
+        Config.gameWidth = Config.gameHeight * Config.aspectRatio;
+    } else if (height > width) { // Set game to user width and height by ratio
+        Config.gameWidth = width;
+        Config.gameHeight = Config.gameWidth / Config.aspectRatio;
+    }
+
+    if (height > Config.gameHeight) {
+        document.getElementById('main-container').style.marginTop = height / 2 - Config.gameHeight / 2 + 'px';
+    }
+
+    [
+        'main-container',
+        'game',
+        'hud',
+        'background',
+        'screen',
+        'shade',
+        'container',
+        'instructions',
+    ].forEach(id => {
+        setSize(id, Config.gameWidth, Config.gameHeight);
+    });
+
+    document.getElementById('hud_screen').style.left = Config.gameWidth + 'px';
+    document.getElementById('hud_screen').style.height = Config.gameHeight + 'px';
 };
 
 SG.artAssets = 1;

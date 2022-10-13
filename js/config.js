@@ -1,10 +1,16 @@
-(function(exports){
+(function(exports) {
 
     exports.Config = {
 
+        aspectRatio: 480 / 300,
+        defaultGameWidth: 480,
+        defaultGameHeight: 300,
+        gameMaxWidth: 720,
+        gameMaxHeight: 450,
+
         friction: 1, // Ground friction
 
-        power: 2,  // How much power Scoots has when you press the button
+        power: 2,  // How much power the seal has when you press the button
 
         // The Hilly Terrain
         hill: {
