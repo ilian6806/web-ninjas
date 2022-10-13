@@ -1,13 +1,7 @@
-var SG = {};
+let SG = {};
 
 SG.timer_enterFrame = null;
 SG.timer_draw = null;
-
-const requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
-    window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
-
-const cancelAnimationFrame = window.cancelAnimationFrame || window.mozCancelAnimationFrame;
-
 
 SG.playGame = function() {
     SG.timer_enterFrame = requestAnimationFrame(SG.enterFrame);
