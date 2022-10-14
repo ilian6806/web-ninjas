@@ -11,7 +11,6 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="white-translucent" />
     <link rel="apple-touch-startup-image" href="images/Loading.png" />
 
-    <link href="css/game.css" rel="stylesheet" type="text/css">
     <script>
         function BlockMove(event) {
             if (!gameIsLoaded || !menu.isGameOver) {
@@ -19,6 +18,21 @@
             }
         }
         var gameIsLoaded = false;
+
+        function getRandomInt(max) {
+            return Math.floor(Math.random() * max);
+        }
+
+        function insertFile(path) {
+            let rand = getRandomInt(1000);
+            if (path.endsWith('.js')) {
+                document.writeln('<script src="' + path + '?v='+ rand +'"><\/script>');
+            } else if (path.endsWith('.css')) {
+                document.writeln('<link href="' + path + '?v='+ rand +'" rel="stylesheet" type="text/css">');
+            }
+        }
+
+        insertFile('css/game.css');
     </script>
 </head>
 
@@ -95,17 +109,19 @@
             </div>
         </div>
 
-        <script src="js/polyfills.js"></script>
-        <script src="js/config.js"></script>
-        <script src="js/helpers.js"></script>
-        <script src="js/HUD.js"></script>
-        <script src="js/menu.js"></script>
-        <script src="js/seal.js"></script>
-        <script src="js/terrain.js"></script>
-        <script src="js/keyCont.js"></script>
-        <script src="js/game.js"></script>
+        <script>
+            [
+                'js/polyfills.js',
+                'js/config.js',
+                'js/helpers.js',
+                'js/HUD.js',
+                'js/menu.js',
+                'js/seal.js',
+                'js/terrain.js',
+                'js/keyCont.js',
+                'js/game.js'
+            ].forEach(path => insertFile(path))
 
-        <script type="text/javascript">
             document.addEventListener('DOMContentLoaded', function () {
                 canvas = document.getElementById('game');
                 ctx = canvas.getContext('2d');
