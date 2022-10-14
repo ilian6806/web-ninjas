@@ -41,9 +41,9 @@
             <canvas id="game" width="480" height="300"> </canvas>
             <canvas id="hud" width="480" height="300"></canvas>
             <div id='instructions' style='position:relative;opacity:1'>
-                <div class='title' style="position:absolute;top:20px;left:20px;"></div>
-                <div class="subtitle" style='position:absolute;top:100px;left:200px;width:270px;height:100px;color:#E84298;'>
-                    Press Screen or S to start
+                <div class='title' style="position:absolute;top:20%;left:0;right:0;"></div>
+                <div class="subtitle">
+                    Press Screen to start
                 </div>
             </div>
             <div id="hud_screen">
@@ -65,20 +65,20 @@
                             <div class="center2">
                                 <div id='pause' class="screenMenu" onclick='menu.togglePause();'>
                                     <div class='title' style="background-position:0 -100px;"></div>
-                                    <div class='stats' id='main' style='font-size:16px'>
-                                        Press the Play button<br>to resume flight
+                                    <div class='stats' id='main' style='margin-top: 30px;font-size:16px'>
+                                        Press the Play button<br>to resume
                                     </div>
                                     <div style="width: 480px; height: 320px; position: absolute; top: 0; left: 0;"></div>
                                 </div>
                                 <div id='gameover' class="screenMenu" style="top:40px;" >
                                     <div class="center2" style="width:400px;">
-                                        <div class='title' style="background-position:0 -50px;"></div>
+                                        <div class='title' style="background-position:0 -50px; margin-bottom: 30px;"></div>
                                         <div class='stats' id='main'>
-                                            You flew <span id='stats_points'>1337m</span> today!
+                                            You made <span id='stats_points'>1337m</span>!
                                         </div>
 
                                         <div class='stats' id='main' style='margin-top:10px;font-size:16px'>
-                                            Press Restart button or S to Start a new day
+                                            Press Restart button to Start Again
                                         </div>
                                     </div>
                                 </div>

@@ -4,18 +4,28 @@ SG.timer_enterFrame = null;
 SG.timer_draw = null;
 
 SG.playGame = function() {
-    SG.timer_enterFrame = requestAnimationFrame(SG.enterFrame);
-    SG.timer_draw = requestAnimationFrame(SG.draw);
+    if (Config.useRaf) {
+        SG.timer_enterFrame = requestAnimationFrame(SG.enterFrame);
+        SG.timer_draw = requestAnimationFrame(SG.draw);
+    } else {
+        SG.timer_enterFrame = setInterval(SG.enterFrame, Config.enterFrameRate);
+        SG.timer_draw = setInterval(SG.draw, Config.drawFrameRate);
+    }
 };
 
 SG.pauseGame = function() {
-    cancelAnimationFrame(SG.timer_enterFrame);
-    cancelAnimationFrame(SG.timer_draw);
+    if (Config.useRaf) {
+        cancelAnimationFrame(SG.timer_enterFrame);
+        cancelAnimationFrame(SG.timer_draw);
+    } else {
+        clearInterval(SG.timer_enterFrame);
+        clearInterval(SG.timer_draw);
+    }
 };
 
 SG.enterFrame = function() {
 
-    if (SG.timer_enterFrame) {
+    if (Config.useRaf && SG.timer_enterFrame) {
         cancelAnimationFrame(SG.timer_enterFrame);
     }
 
@@ -56,11 +66,13 @@ SG.enterFrame = function() {
         SG.yDisp += SG.shake;
         SG.shake *= -0.5;
     }
-    requestAnimationFrame(SG.enterFrame);
+    if (Config.useRaf) {
+        requestAnimationFrame(SG.enterFrame);
+    }
 };
 
 SG.draw = function() {
-    if (SG.timer_draw) {
+    if (SG.timer_draw && Config.useRaf) {
         cancelAnimationFrame(SG.timer_draw);
     }
     ctx.clearRect(0, 0, 960, 640); // Clear the canvas
@@ -71,7 +83,10 @@ SG.draw = function() {
     seal.draw();
     HUD.draw();
     ctx.restore();
-    requestAnimationFrame(SG.draw);
+
+    if (Config.useRaf) {
+        requestAnimationFrame(SG.draw);
+    }
 };
 
 SG.init = function() {
@@ -150,6 +165,10 @@ SG.onAssetLoad = function() {
 };
 
 SG.startTheGame = function() {
+    if (! Config.useRaf) {
+        SG.enterFrame();
+        SG.draw();
+    }
     SG.playGame();
     document.getElementById("screen").style.display = "none";
 };

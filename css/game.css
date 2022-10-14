@@ -10,19 +10,19 @@ html {
 }
 
 body {
-    color: #FFF;
+    color: white;
     overflow: hidden;
     margin: 0;
     padding: 0;
-    font-family: Helvetica, Arial, sans-serif;
+    font-family: Impact, Helvetica, Arial, sans-serif;
 }
 
 div,
 p,
 span {
-    text-shadow: 0 0 2px #943882;
-    -moz-text-shadow: 0 0 2px #943882;
-    -webkit-text-shadow: 0 0 2px #943882;
+    text-shadow: 0 0 2px #82b3ff;
+    -moz-text-shadow: 0 0 2px #82b3ff;
+    -webkit-text-shadow: 0 0 2px #82b3ff;
 }
 
 canvas, #background, #screen, #screen>div {
@@ -78,8 +78,8 @@ img {
 
 #screen > #shade {
     background-color: #000;
-    opacity: 0.5;
-    filter: alpha(opacity=50);
+    opacity: 0.2;
+    filter: alpha(opacity=20);
 }
 
 #hud_screen {
@@ -95,7 +95,7 @@ img {
     width: 30px;
     height: 30px;
     margin-left: 5px;
-    background-color: #555;
+    background-color: lightblue;
     float: right;
     background: url('../images/Buttons.png');
     cursor: pointer;
@@ -126,7 +126,12 @@ img {
 
 .subtitle {
     font-size: 20px;
-    margin-top: 20px;
+    position: absolute;
+    top: 40%;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    text-align: center;
 }
 
 .stats {
@@ -152,5 +157,5 @@ img {
     text-align: right;
     margin-right: 10px;
     width: 130px;
-    color: #E84298;
+    /*color: white;*/
 }
