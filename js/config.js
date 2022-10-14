@@ -15,7 +15,7 @@
 
         playtime: 1,
 
-        friction: 1, // Ground friction
+        friction: 0.992, // Ground friction
 
         power: 2,  // How much power the seal has when you press the button
 

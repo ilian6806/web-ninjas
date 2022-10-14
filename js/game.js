@@ -39,7 +39,7 @@ SG.enterFrame = function() {
         SG.gScale*=9;
         SG.yDisp*=9;
 
-        if (seal.coord.y<-100) {
+        if (seal.coord.y < -100) {
             SG.yDisp += (seal.coord.y+100)*0.5;
         } else {
             SG.yDisp += 0;
@@ -49,7 +49,9 @@ SG.enterFrame = function() {
             SG.gScale += 0.7;
             SG.yDisp += 100;
         } else {
-            if (seal.coord.y<-100) {
+            if (seal.coord.y < -400) {
+                SG.gScale += 0.25;
+            } else if (seal.coord.y < -100) {
                 SG.gScale += 0.30;
             } else {
                 SG.gScale += 0.40;

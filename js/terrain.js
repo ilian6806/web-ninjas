@@ -93,7 +93,12 @@ terrain.drawFrom = function( starttt, yOff ) {
     ctx.moveTo( 0-terrain.drawFarBack, tmpTerrYDraw+yOff );
     var i;
     if (seal.startMoving) {
-        if (SG.gScale<0.35) {
+        if (SG.gScale<0.30) {
+            for ( i=30-terrain.drawFarBack; i<=1600; i+=40 ) {
+                tmpTerrYDraw = terrain.funct(starttt+i);
+                ctx.lineTo( i, tmpTerrYDraw+yOff );
+            }
+        } else if (SG.gScale<0.35) {
             for ( i=30-terrain.drawFarBack; i<=1440; i+=30 ) {
                 tmpTerrYDraw = terrain.funct(starttt+i);
                 ctx.lineTo( i, tmpTerrYDraw+yOff );
