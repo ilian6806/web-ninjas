@@ -165,6 +165,7 @@ img {
     height: 15px;
     background-color: white;
     display: inline-block;
+    vertical-align: middle;
 }
 
 #barStatus {
@@ -173,9 +174,11 @@ img {
     height: 100%;
     background-color: #3580EA;
 }
+
 .heart-icon {
+    height: 25px;
     color: #3580EA;
-    font-size: 20px;
     display: inline-block;
+    vertical-align: middle;
     margin-left: 5px;
 }

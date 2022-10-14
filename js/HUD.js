@@ -73,7 +73,10 @@ HUD.enterFrame = function() {
     }
 
     document.getElementById('points').innerHTML = HUD.points+"m";
-    document.getElementById('barStatus').style.width = HUD.timer * 100 / Config.playtime + '%';
+
+    let percent = HUD.timer * 100 / Config.playtime;
+    document.getElementById('barStatus').style.width = percent + '%';
+    document.getElementById('barStatus').style.backgroundColor = percent < 20 ? 'red' : '#3580EA';
 
     HUD.points = Math.floor(seal.coord.x/100);
     if (HUD.points<0) {
