@@ -11,7 +11,7 @@
         drawFrameRate: 1000/60,
         enterFrameRate: 1000/60,
 
-        themeChangeRate: 300,
+        themeChangeRate: 400,
 
         playtime: 1,
 
