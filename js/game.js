@@ -105,14 +105,16 @@ SG.setSize = function() {
     let width = window.innerWidth;
     let height = window.innerHeight;
 
-    //@TODO: deviceRatio check for changing Config.gameMaxHeight/Height
-
     if (width > Config.gameMaxWidth && height > Config.gameMaxHeight && width > height) { // Set game to max width and height by ratio
         Config.gameWidth = Config.gameMaxWidth;
         Config.gameHeight = Config.gameWidth / Config.aspectRatio;
     } else if (height > Config.gameMaxHeight) { // Set game to max height and width by ratio
         Config.gameHeight = Config.gameMaxHeight;
         Config.gameWidth = Config.gameHeight * Config.aspectRatio;
+        if (isMobile()) {
+            Config.gameWidth = width;
+            Config.gameHeight = Config.gameWidth / Config.aspectRatio;
+        }
     } else if (width < Config.defaultGameWidth) { // Set game to user width and height by ratio
         Config.gameWidth = width;
         Config.gameHeight = Config.gameWidth / Config.aspectRatio;
