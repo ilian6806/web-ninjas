@@ -2,6 +2,7 @@ let SG = {};
 
 SG.timer_enterFrame = null;
 SG.timer_draw = null;
+SG.frame = 1;
 
 SG.playGame = function() {
     if (Config.useRaf) {
@@ -34,6 +35,7 @@ SG.enterFrame = function() {
 
     if (seal.startMoving) {
 
+        SG.frame++;
         SG.gScale*=9;
         SG.yDisp*=9;
 

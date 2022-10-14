@@ -56,10 +56,34 @@ terrain.functDiff = function(xx) {
             * ( Math.sin( Math.PI*( xx-ANode.x )/( BNode.x-ANode.x ) ) );
 };
 
+terrain.colorIndex = 4;
+terrain.colors = [225, 230, 235, 240, 245, 240, 235, 230, 225];
+terrain.strokeColors = [200, 210, 220, 230, 235, 230, 220, 210, 200];
+terrain.backgroundColors = [
+    [10, 37, 46],
+    [51, 104, 121],
+    [93, 147, 165],
+    [183, 210, 219],
+    [200, 230, 240],
+    [183, 210, 219],
+    [93, 147, 165],
+    [51, 104, 121],
+    [10, 37, 46]
+];
+
 terrain.draw = function( starttt ) {
+    if (SG.frame % Config.themeChangeRate === 0) {
+        if (terrain.colorIndex >= terrain.strokeColors.length - 1) {
+            terrain.colorIndex = 0;
+        } else {
+            terrain.colorIndex++;
+        }
+        document.getElementById('background').style.backgroundColor = 'rgb(' + terrain.backgroundColors[terrain.colorIndex].join(',') + ')';
+    }
     ctx.lineWidth = 50;
-    ctx.strokeStyle = "rgb(240,255,255)"; // Top
-    ctx.fillStyle = "rgb(255,255,255)"; // Middle
+    ctx.strokeStyle = "rgb(" + terrain.strokeColors[terrain.colorIndex] + ",255,255)"; // Top
+    ctx.fillStyle = "rgb(" + terrain.colors[terrain.colorIndex] + ",255,255)"; // Middle
+
     terrain.drawFrom(starttt,25);
 };
 

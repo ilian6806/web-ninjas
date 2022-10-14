@@ -11,6 +11,8 @@
         drawFrameRate: 1000/60,
         enterFrameRate: 1000/60,
 
+        themeChangeRate: 200,
+
         playtime: 1,
 
         friction: 1, // Ground friction

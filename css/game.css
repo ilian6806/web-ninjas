@@ -54,6 +54,7 @@ img {
 
 #background {
     background-color: #C8E6F0;
+    transition: background-color .7s ease-out;
 }
 
 #loading {

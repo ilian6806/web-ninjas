@@ -3,9 +3,12 @@ var kCont = {};
 kCont.down = false;
 
 kCont.S_FUNCTION = function() {
-    if(!kCont.down && menu.isGameOver){ SG.init(); SG.startTheGame(); }
+    if(! kCont.down && menu.isGameOver) {
+        SG.init();
+        SG.startTheGame();
+    }
     kCont.down = true;
-    if(menu.isPaused){
+    if (menu.isPaused){
         menu.play();
     }
 };
