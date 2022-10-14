@@ -1,7 +1,7 @@
 var terrain = {};
 
 terrain.init = function() {
-    terrain.nodes = [ {"x":-200,"y":-100}, {"x":0,"y":-200}, {"x":400,"y":300}, {"x":700,"y":100} ];
+    terrain.nodes = [ {"x":-200,"y":-100}, {"x":0,"y":-200}, {"x":400,"y":150}, {"x":700,"y":150} ];
     terrain.lastX = 2;
     terrain.drawFarBack = 600;
     var i;

@@ -6,6 +6,9 @@ menu.init = function() {
     document.getElementById("screen").style.display = "none";
     document.getElementById("pause").style.display = "block";
     document.getElementById("gameover").style.display = "none";
+    if (isMobile()) {
+        document.getElementById('bfullscreen').style.display = "block";
+    }
 };
 
 menu.play = function() {
@@ -43,6 +46,17 @@ menu.togglePause = function() {
         } else {
             menu.pause();
         }
+    }
+};
+
+menu.toggleFullScreen = function () {
+    if (window.innerHeight > window.innerWidth) {
+        return alert('Change orientation to landscape orientation!');
+    }
+    if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen();
+    } else if (document.exitFullscreen) {
+        document.exitFullscreen();
     }
 };
 

@@ -6,7 +6,7 @@
 
     <meta charset="utf-8">
     <meta name="robots" content="noindex, nofollow">
-    <meta name="viewport" width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+    <meta name="viewport" content="user-scalable=no"/>
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="white-translucent" />
     <link rel="apple-touch-startup-image" href="images/Loading.png" />
@@ -62,6 +62,9 @@
             </div>
             <div id="hud_screen">
                 <div style="position:absolute;top:0;right:0;margin:10px;width:150px">
+                    <div class="hud_button" id="bfullscreen"
+                         ontouchstart='menu.toggleFullScreen();'
+                         onclick='menu.toggleFullScreen();' style="display: none;"></div>
                     <div class="hud_button" id="breset"
                         ontouchstart="if(seal.startMoving){SG.pauseGame();SG.init();SG.startTheGame();}"
                         onclick='if(seal.startMoving){SG.pauseGame();SG.init();SG.startTheGame();}'></div>
@@ -129,11 +132,34 @@
                 hudCTX = hudCanvas.getContext('2d');
                 SG.loadArtAssets();
                 SG.init();
-                window.onresize = function () {
-                    window.location.reload();
-                };
+                if (isMobile()) {
+                    window.onorientationchange = (event) => {
+                        window.location.reload();
+                    };
+                } else {
+                    window.onresize = function () {
+                        window.location.reload();
+                    };
+                }
             }, false);
         </script>
     </div>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.12.1/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.12.1/firebase-analytics.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAijKDIzDhN2HdR_KuYBterv-sPGG2XO74",
+            authDomain: "web-ninjas-87b27.firebaseapp.com",
+            projectId: "web-ninjas-87b27",
+            storageBucket: "web-ninjas-87b27.appspot.com",
+            messagingSenderId: "332516662241",
+            appId: "1:332516662241:web:ad4325b38349a59e3290a0",
+            measurementId: "G-4F44CC2006"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+    </script>
 </body>
 </html>
