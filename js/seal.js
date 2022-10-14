@@ -1,5 +1,5 @@
 var seal = {};
-seal.image = new Image(800,600);
+seal.image = new Image(512,512);
 
 seal.init = function() {
     seal.coord = new Object();
