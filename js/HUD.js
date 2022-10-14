@@ -2,7 +2,7 @@ var HUD = {};
 
 HUD.init = function() {
     HUD.awesome = 0;
-    HUD.timer = 1;
+    HUD.timer = Config.playtime;
     HUD.points = 0;
     HUD.parasprites = 0;
     HUD.groundvel = 0;
@@ -12,20 +12,20 @@ HUD.init = function() {
 
 HUD.draw = function() {
 
-    hudCTX.clearRect(0, 0, Config.gameWidth, Config.gameHeight); // Clear the canvas
-
-    // Draw Night
-    if (HUD.timer < 0.2) {
-        hudCTX.save();
-        hudCTX.fillStyle = "#003";
-        if (HUD.timer > 0) {
-            hudCTX.globalAlpha = 0.8*(0.2-HUD.timer)/0.2;
-        } else {
-            hudCTX.globalAlpha = 0.8;
-        }
-        hudCTX.fillRect(0,0, Config.gameWidth, Config.gameHeight);
-        hudCTX.restore();
-    }
+    // hudCTX.clearRect(0, 0, Config.gameWidth, Config.gameHeight); // Clear the canvas
+    //
+    // // Draw Night
+    // if (HUD.timer < 0.2) {
+    //     hudCTX.save();
+    //     hudCTX.fillStyle = "#003";
+    //     if (HUD.timer > 0) {
+    //         hudCTX.globalAlpha = 0.8*(0.2-HUD.timer)/0.2;
+    //     } else {
+    //         hudCTX.globalAlpha = 0.8;
+    //     }
+    //     hudCTX.fillRect(0,0, Config.gameWidth, Config.gameHeight);
+    //     hudCTX.restore();
+    // }
 }
 
 HUD.enterFrame = function() {
@@ -73,6 +73,8 @@ HUD.enterFrame = function() {
     }
 
     document.getElementById('points').innerHTML = HUD.points+"m";
+    document.getElementById('barStatus').style.width = HUD.timer * 100 / Config.playtime + '%';
+
     HUD.points = Math.floor(seal.coord.x/100);
     if (HUD.points<0) {
         HUD.points=0;

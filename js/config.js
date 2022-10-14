@@ -11,6 +11,8 @@
         drawFrameRate: 1000/60,
         enterFrameRate: 1000/60,
 
+        playtime: 1,
+
         friction: 1, // Ground friction
 
         power: 2,  // How much power the seal has when you press the button

@@ -55,7 +55,13 @@
                         ontouchstart='menu.togglePause();'
                         onclick='menu.togglePause();'></div>
                 </div>
-                <span style="position:absolute;right:0;bottom:0;margin:10px" id="points">0</span>
+                <span style="position:absolute;left:150px;top:7px;margin:10px;" id="points">0</span>
+                <div style="position:absolute;left:0;top:2px;margin:10px">
+                    <div id="progressBar">
+                        <div id="barStatus"></div>
+                    </div>
+                    <span class="heart-icon">&#10084;</span>
+                </div>
             </div>
             <div id="screen">
                 <div id="shade"></div>
@@ -70,7 +76,7 @@
                                     </div>
                                     <div style="width: 480px; height: 320px; position: absolute; top: 0; left: 0;"></div>
                                 </div>
-                                <div id='gameover' class="screenMenu" style="top:40px;" >
+                                <div id='gameover' class="screenMenu">
                                     <div class="center2" style="width:400px;">
                                         <div class='title' style="background-position:0 -50px; margin-bottom: 30px;"></div>
                                         <div class='stats' id='main'>

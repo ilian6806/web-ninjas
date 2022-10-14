@@ -85,9 +85,8 @@ img {
 #hud_screen {
     position: absolute;
     top: 0;
-    left: 480px;
-    width: 0;
-    height: 300px;
+    left: 0;
+    width: 100%;
     z-index: 1;
 }
 
@@ -158,4 +157,25 @@ img {
     margin-right: 10px;
     width: 130px;
     /*color: white;*/
+}
+
+#progressBar {
+    position: relative;
+    width: 100px;
+    height: 15px;
+    background-color: white;
+    display: inline-block;
+}
+
+#barStatus {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #3580EA;
+}
+.heart-icon {
+    color: #3580EA;
+    font-size: 20px;
+    display: inline-block;
+    margin-left: 5px;
 }

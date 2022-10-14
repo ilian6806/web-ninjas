@@ -144,7 +144,7 @@ SG.setSize = function() {
         setSize(id, Config.gameWidth, Config.gameHeight);
     });
 
-    document.getElementById('hud_screen').style.left = Config.gameWidth + 'px';
+    // document.getElementById('hud_screen').style.left = Config.gameWidth + 'px';
     document.getElementById('hud_screen').style.height = Config.gameHeight + 'px';
 };
 
