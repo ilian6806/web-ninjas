@@ -24,7 +24,7 @@
         }
 
         function insertFile(path) {
-            let rand = getRandomInt(1000);
+            let rand = 1; //getRandomInt(1000);
             if (path.endsWith('.js')) {
                 document.writeln('<script src="' + path + '?v='+ rand +'"><\/script>');
             } else if (path.endsWith('.css')) {
