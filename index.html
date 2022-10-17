@@ -1,29 +1,165 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Web Ninjas Team</title>
+<head>
+    <title>Web Ninjas Team</title>
+    <base target="_blank" />
 
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="robots" content="noindex, nofollow">
+    <meta charset="utf-8">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="viewport" content="user-scalable=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="white-translucent" />
+    <link rel="apple-touch-startup-image" href="images/Loading.png" />
 
-        <!-- update the version number as needed -->
-        <script defer src="/__/firebase/9.12.0/firebase-app-compat.js"></script>
-        <!-- include only the Firebase features as you need -->
-        <script defer src="/__/firebase/9.12.0/firebase-auth-compat.js"></script>
-        <script defer src="/__/firebase/9.12.0/firebase-database-compat.js"></script>
-        <script defer src="/__/firebase/9.12.0/firebase-firestore-compat.js"></script>
-        <script defer src="/__/firebase/9.12.0/firebase-functions-compat.js"></script>
-        <script defer src="/__/firebase/9.12.0/firebase-messaging-compat.js"></script>
-        <script defer src="/__/firebase/9.12.0/firebase-storage-compat.js"></script>
-        <script defer src="/__/firebase/9.12.0/firebase-analytics-compat.js"></script>
-        <script defer src="/__/firebase/9.12.0/firebase-remote-config-compat.js"></script>
-        <script defer src="/__/firebase/9.12.0/firebase-performance-compat.js"></script>
-        <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+    <script>
+        function BlockMove(event) {
+            if (!gameIsLoaded || !menu.isGameOver) {
+                event.preventDefault();
+            }
+        }
+        var gameIsLoaded = false;
 
-        <script type="text/javascript" src="js/cocos2d-js-v3.3-lite.js" charset="UTF-8"></script>
-    </head>
-    <body>
-        <canvas id="game-canvas" width="960" height="640"></canvas>
-    </body>
+        function getRandomInt(max) {
+            return Math.floor(Math.random() * max);
+        }
+
+        function insertFile(path) {
+            let rand = getRandomInt(1000);
+            if (path.endsWith('.js')) {
+                document.writeln('<script src="' + path + '?v='+ rand +'"><\/script>');
+            } else if (path.endsWith('.css')) {
+                document.writeln('<link href="' + path + '?v='+ rand +'" rel="stylesheet" type="text/css">');
+            }
+        }
+
+        insertFile('css/game.css');
+    </script>
+</head>
+
+<body
+    onkeydown="if(gameIsLoaded){ kCont.keyDownHandler(event); }"
+    onkeyup="if(gameIsLoaded){ kCont.keyUpHandler(event); }"
+    onblur="if(gameIsLoaded){ kCont.down=false; menu.pause(); }"
+    onmousedown="if(gameIsLoaded){ if(event.pageX<360||event.pageY>45){ kCont.down = true; } }"
+    onmouseup="if(gameIsLoaded){ kCont.down = false; }"
+    ontouchstart="if(gameIsLoaded){ if(event.touches[0].pageX<360||event.touches[0].pageY>45){ kCont.down = true; } } BlockMove(event);"
+    ontouchend="if(gameIsLoaded){ kCont.down = false; }"
+    ontouchcancel="if(gameIsLoaded){ kCont.down = false; }"
+>
+
+    <div id="main-container">
+        <div id="background">
+            <div id='loading'></div>
+        </div>
+        <div id="game_container" style='display:none;'>
+            <canvas id="game" width="480" height="300"> </canvas>
+            <canvas id="hud" width="480" height="300"></canvas>
+            <div id='instructions' style='position:relative;opacity:1'>
+                <div class='title' style="position:absolute;top:20%;left:0;right:0;"></div>
+                <div class="subtitle">
+                    Press Screen to start
+                </div>
+            </div>
+            <div id="hud_screen">
+                <div style="position:absolute;top:0;right:0;margin:10px;width:150px">
+                    <div class="hud_button" id="bfullscreen"
+                         ontouchstart='menu.toggleFullScreen();'
+                         onclick='menu.toggleFullScreen();' style="display: none;"></div>
+                    <div class="hud_button" id="breset"
+                        ontouchstart="if(seal.startMoving){SG.pauseGame();SG.init();SG.startTheGame();}"
+                        onclick='if(seal.startMoving){SG.pauseGame();SG.init();SG.startTheGame();}'></div>
+                    <div class="hud_button" id="bpause"
+                        ontouchstart='menu.togglePause();'
+                        onclick='menu.togglePause();'></div>
+                </div>
+                <span style="position:absolute;left:150px;top:5px;margin:10px;" id="points">0</span>
+                <div style="position:absolute;left:0;top:2px;margin:10px;">
+                    <div id="progressBar">
+                        <div id="barStatus"></div>
+                    </div>
+                    <img class="heart-icon" src="images/heart.png" />
+                </div>
+            </div>
+            <div id="screen">
+                <div id="shade"></div>
+                <div id="container">
+                    <div class="center0">
+                        <div class="center1">
+                            <div class="center2">
+                                <div id='pause' class="screenMenu" onclick='menu.togglePause();'>
+                                    <div class='title' style="background-position:0 -100px;"></div>
+                                    <div class='stats' id='main' style='margin-top: 30px;font-size:16px'>
+                                        Press the Play button<br>to resume
+                                    </div>
+                                    <div style="width: 480px; height: 320px; position: absolute; top: 0; left: 0;"></div>
+                                </div>
+                                <div id='gameover' class="screenMenu">
+                                    <div class="center2" style="width:400px;">
+                                        <div class='title' style="background-position:0 -50px; margin-bottom: 30px;"></div>
+                                        <div class='stats' id='main'>
+                                            You made <span id='stats_points'>1337m</span>!
+                                        </div>
+
+                                        <div class='stats' id='main' style='margin-top:10px;font-size:16px'>
+                                            Press Restart button to Start Again
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            [
+                'js/polyfills.js',
+                'js/config.js',
+                'js/helpers.js',
+                'js/HUD.js',
+                'js/menu.js',
+                'js/seal.js',
+                'js/terrain.js',
+                'js/keyCont.js',
+                'js/game.js'
+            ].forEach(path => insertFile(path))
+
+            document.addEventListener('DOMContentLoaded', function () {
+                canvas = document.getElementById('game');
+                ctx = canvas.getContext('2d');
+                hudCanvas = document.getElementById('hud');
+                hudCTX = hudCanvas.getContext('2d');
+                SG.loadArtAssets();
+                SG.init();
+                if (isMobile()) {
+                    window.onorientationchange = (event) => {
+                        window.location.reload();
+                    };
+                } else {
+                    window.onresize = function () {
+                        window.location.reload();
+                    };
+                }
+            }, false);
+        </script>
+    </div>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.12.1/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.12.1/firebase-analytics.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAijKDIzDhN2HdR_KuYBterv-sPGG2XO74",
+            authDomain: "web-ninjas-87b27.firebaseapp.com",
+            projectId: "web-ninjas-87b27",
+            storageBucket: "web-ninjas-87b27.appspot.com",
+            messagingSenderId: "332516662241",
+            appId: "1:332516662241:web:ad4325b38349a59e3290a0",
+            measurementId: "G-4F44CC2006"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+    </script>
+</body>
 </html>
